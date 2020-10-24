@@ -37,8 +37,26 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
+const DECODE = {
+    '11': '-',
+    '10': '.',
+    '00': ''
+}
+
+const SPACE = '**********';
+
+function decodeLetter(letter) {
+    const morseLetter = letter.match(/.{1,2}/g).map((pair) => {
+        return DECODE[pair]
+    }).join('');
+
+    return MORSE_TABLE[morseLetter];
+}
+
 function decode(expr) {
-    // write your solution here
+    return expr.match(/.{1,10}/g).map((letter) => {
+        return letter === SPACE ? ' ' : decodeLetter(letter);
+    }).join('')
 }
 
 module.exports = {
